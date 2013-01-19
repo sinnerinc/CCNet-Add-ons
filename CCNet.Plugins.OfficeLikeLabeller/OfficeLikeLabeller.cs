@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ThoughtWorks.CruiseControl.Core.Label;
 using Exortech.NetReflector;
+using ThoughtWorks.CruiseControl.Core;
 
 namespace CCNet.Plugins.Labellers
 {
@@ -11,6 +12,7 @@ namespace CCNet.Plugins.Labellers
     /// Office-like labeller inspired by following post of Jeff Atwood:
     /// http://www.codinghorror.com/blog/2007/02/whats-in-a-version-number-anyway.html
     /// </summary>
+    [ReflectorType("officeLikeLabeller")]
     public class OfficeLikeLabeller : LabellerBase
     {
         [ReflectorProperty("startYear", Required = true)]
@@ -24,9 +26,19 @@ namespace CCNet.Plugins.Labellers
 
         public override string Generate(ThoughtWorks.CruiseControl.Core.IIntegrationResult integrationResult)
         {
-            //ThoughtWorks.CruiseControl.Core.Util.Log.Debug("");
-            
-            throw new NotImplementedException();
+            string encodedDate = EncodeDate();
+            Version lastVersion = new Version(integrationResult.Label);
+
+            int newRevisionNumber = lastVersion.Revision + 1;
+            if (lastVersion.Major != Major ||
+                lastVersion.Minor != Minor ||
+                lastVersion.Build.ToString() != encodedDate)
+            {
+                newRevisionNumber = 0;
+            }
+
+            return string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0}.{1}.{2}.{3}",
+                Major, Minor, encodedDate, newRevisionNumber);
         }
 
         /// <summary>

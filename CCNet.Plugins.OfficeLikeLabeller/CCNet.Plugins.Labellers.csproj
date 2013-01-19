@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCNet.Plugins.Labellers</RootNamespace>
-    <AssemblyName>CCNet.Plugins.Labellers</AssemblyName>
+    <AssemblyName>ccnet.labellers.plugin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
