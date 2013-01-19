@@ -78,8 +78,8 @@ publish
 # Publish Web Output
 *.Publish.xml
 
-# NuGet Packages Directory
-packages
+# NuGet Packages
+*.nupkg
 
 # Windows Azure Build Output
 csx
