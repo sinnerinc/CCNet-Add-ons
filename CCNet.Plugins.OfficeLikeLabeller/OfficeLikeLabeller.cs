@@ -16,7 +16,7 @@ namespace CCNet.Plugins.Labellers
     public class OfficeLikeLabeller : LabellerBase
     {
         [ReflectorProperty("startYear", Required = true)]
-        public int StartYear = 2003;
+        public int StartYear = 2013;
 
         [ReflectorProperty("major", Required = true)]
         public int Major = 0;
@@ -27,7 +27,16 @@ namespace CCNet.Plugins.Labellers
         public override string Generate(ThoughtWorks.CruiseControl.Core.IIntegrationResult integrationResult)
         {
             string encodedDate = EncodeDate();
-            Version lastVersion = new Version(integrationResult.Label);
+            Version lastVersion;
+
+            try
+            {
+                lastVersion = new Version(integrationResult.Label);                
+            }
+            catch (ArgumentException)
+            {
+                lastVersion = new Version();
+            }
 
             int newRevisionNumber = lastVersion.Revision + 1;
             if (lastVersion.Major != Major ||

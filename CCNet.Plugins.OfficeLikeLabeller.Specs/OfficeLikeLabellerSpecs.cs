@@ -7,6 +7,7 @@ using Machine.Specifications;
 namespace CCNet.Plugins.Labellers.Specs
 {
     // Use cases from: http://www.codinghorror.com/blog/2007/02/whats-in-a-version-number-anyway.html
+    // TODO: for this tests probbly it would be better to use xUnit and Theories
 
     public class when_encoding_date_on_17_oct_2005_for_product_started_in_2003 : OfficeLikeLabellerContext
     {
@@ -54,7 +55,7 @@ namespace CCNet.Plugins.Labellers.Specs
 
         // Comments: For 5608 to work, "Month 1" for Office 2003 and XP would have been Jan 1999, 
         // Mal on February 16, 2007 7:52 AM
-        It should_result_in_5608 = () =>
+        It should_result_in_4408 = () =>
             _result.ShouldEqual("4408");
     }
 
